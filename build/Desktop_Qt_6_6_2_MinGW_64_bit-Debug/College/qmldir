@@ -1,5 +1,0 @@
-module College
-typeinfo appCollege.qmltypes
-prefer :/qt/qml/College/
-Main 1.0 Main.qml
-
