@@ -1,5 +1,5 @@
-C:/Users/Garron\ Grim/Desktop/College/build/appCollege_autogen/EWIEGA46WW/moc_collegemodel.cpp: C:/Users/Garron\ Grim/Desktop/College/collegemodel.h \
-  C:/Users/Garron\ Grim/Desktop/College/build/appCollege_autogen/moc_predefs.h \
+C:/Users/Garron\ Grim/Desktop/College-Touring-main/College-Touring/build/appCollege_autogen/EWIEGA46WW/moc_collegemodel.cpp: C:/Users/Garron\ Grim/Desktop/College-Touring-main/College-Touring/collegemodel.h \
+  C:/Users/Garron\ Grim/Desktop/College-Touring-main/College-Touring/build/appCollege_autogen/moc_predefs.h \
   C:/Qt/6.6.2/mingw_64/include/QtCore/QAbstractListModel \
   C:/Qt/6.6.2/mingw_64/include/QtCore/QObject \
   C:/Qt/6.6.2/mingw_64/include/QtCore/QString \

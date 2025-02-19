@@ -1,17 +1,17 @@
 {
-	"BUILD_DIR" : "C:/Users/Garron Grim/Desktop/College/build/appCollege_autogen",
-	"CMAKE_BINARY_DIR" : "C:/Users/Garron Grim/Desktop/College/build",
-	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/Garron Grim/Desktop/College/build",
-	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/Garron Grim/Desktop/College",
+	"BUILD_DIR" : "C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/appCollege_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring",
 	"CMAKE_EXECUTABLE" : "C:/Program Files/CMake/bin/cmake.exe",
 	"CMAKE_LIST_FILES" : 
 	[
-		"C:/Users/Garron Grim/Desktop/College/CMakeLists.txt",
-		"C:/Users/Garron Grim/Desktop/College/build/CMakeFiles/3.28.0/CMakeSystem.cmake",
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/CMakeLists.txt",
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/CMakeFiles/3.28.0/CMakeSystem.cmake",
 		"C:/Qt/6.6.2/mingw_64/lib/cmake/Qt6/qt.toolchain.cmake",
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake",
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/Platform/Windows-Initialize.cmake",
-		"C:/Users/Garron Grim/Desktop/College/build/CMakeFiles/3.28.0/CMakeCXXCompiler.cmake",
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/CMakeFiles/3.28.0/CMakeCXXCompiler.cmake",
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake",
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeGenericSystem.cmake",
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake",
@@ -24,7 +24,7 @@
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake",
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX.cmake",
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/Platform/Windows-GNU.cmake",
-		"C:/Users/Garron Grim/Desktop/College/build/CMakeFiles/3.28.0/CMakeRCCompiler.cmake",
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/CMakeFiles/3.28.0/CMakeRCCompiler.cmake",
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeRCInformation.cmake",
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/Platform/Windows-windres.cmake",
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX-ABI.cmake",
@@ -648,21 +648,21 @@
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/GNUInstallDirs.cmake",
 		"C:/Qt/6.6.2/mingw_64/lib/cmake/Qt6Qml/Qt6qmldirTemplate.cmake.in"
 	],
-	"CMAKE_SOURCE_DIR" : "C:/Users/Garron Grim/Desktop/College",
-	"DEP_FILE" : "C:/Users/Garron Grim/Desktop/College/build/appCollege_autogen/deps",
+	"CMAKE_SOURCE_DIR" : "C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring",
+	"DEP_FILE" : "C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/appCollege_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "appCollege_autogen/timestamp",
 	"HEADERS" : 
 	[
 		[
-			"C:/Users/Garron Grim/Desktop/College/collegemodel.h",
+			"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/collegemodel.h",
 			"MU",
 			"EWIEGA46WW/moc_collegemodel.cpp",
 			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "C:/Users/Garron Grim/Desktop/College/build/appCollege_autogen/include",
-	"MOC_COMPILATION_FILE" : "C:/Users/Garron Grim/Desktop/College/build/appCollege_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/appCollege_autogen/include",
+	"MOC_COMPILATION_FILE" : "C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/appCollege_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"MINGW_HAS_SECURE_API=1",
@@ -691,7 +691,7 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"C:/Users/Garron Grim/Desktop/College",
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring",
 		"C:/Qt/6.6.2/mingw_64/include/QtQml/6.6.2",
 		"C:/Qt/6.6.2/mingw_64/include/QtQml/6.6.2/QtQml",
 		"C:/Qt/6.6.2/mingw_64/include/QtCore/6.6.2",
@@ -731,41 +731,49 @@
 		"-c",
 		"C:/Program Files/CMake/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "C:/Users/Garron Grim/Desktop/College/build/appCollege_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/appCollege_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : 
 	[
-		"C:/Users/Garron Grim/Desktop/College/build/.rcc/qmlcache/appCollege_Main_qml.cpp",
-		"C:/Users/Garron Grim/Desktop/College/build/.rcc/qrc_appCollege_raw_qml_0.cpp",
-		"C:/Users/Garron Grim/Desktop/College/build/.rcc/qrc_qmake_College.cpp",
-		"C:/Users/Garron Grim/Desktop/College/build/appcollege_qmltyperegistrations.cpp"
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/.rcc/qmlcache/appCollege_Main_qml.cpp",
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/.rcc/qrc_appCollege_raw_qml_0.cpp",
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/.rcc/qrc_qmake_College.cpp",
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/appcollege_qmltyperegistrations.cpp"
 	],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 10,
-	"PARSE_CACHE_FILE" : "C:/Users/Garron Grim/Desktop/College/build/CMakeFiles/appCollege_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE" : "C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/CMakeFiles/appCollege_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "C:/Qt/6.6.2/mingw_64/./bin/moc.exe",
 	"QT_UIC_EXECUTABLE" : "",
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 6,
-	"SETTINGS_FILE" : "C:/Users/Garron Grim/Desktop/College/build/CMakeFiles/appCollege_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/CMakeFiles/appCollege_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[
-			"C:/Users/Garron Grim/Desktop/College/build/.rcc/qmlcache/appCollege_qmlcache_loader.cpp",
+			"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/.rcc/qmlcache/appCollege_qmlcache_loader.cpp",
 			"MU",
 			null
 		],
-		[ "C:/Users/Garron Grim/Desktop/College/collegemodel.cpp", "MU", null ],
-		[ "C:/Users/Garron Grim/Desktop/College/main.cpp", "MU", null ]
+		[
+			"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/collegemodel.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/main.cpp",
+			"MU",
+			null
+		]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : 
 	[
-		"C:/Users/Garron Grim/Desktop/College/build/.rcc/qmlcache/appCollege_Main_qml.cpp",
-		"C:/Users/Garron Grim/Desktop/College/build/.rcc/qrc_appCollege_raw_qml_0.cpp",
-		"C:/Users/Garron Grim/Desktop/College/build/.rcc/qrc_qmake_College.cpp",
-		"C:/Users/Garron Grim/Desktop/College/build/appcollege_qmltyperegistrations.cpp"
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/.rcc/qmlcache/appCollege_Main_qml.cpp",
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/.rcc/qrc_appCollege_raw_qml_0.cpp",
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/.rcc/qrc_qmake_College.cpp",
+		"C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/appcollege_qmltyperegistrations.cpp"
 	],
 	"UIC_UI_FILES" : [],
 	"VERBOSITY" : 0

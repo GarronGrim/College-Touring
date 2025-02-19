@@ -1,6 +1,6 @@
 <RCC>
   <qresource prefix="/qt/qml/College">
-    <file alias="qmldir">C:/Users/Garron Grim/Desktop/College/build/College/qmldir</file>
+    <file alias="qmldir">C:/Users/Garron Grim/Desktop/College-Touring-main/College-Touring/build/College/qmldir</file>
   </qresource>
 </RCC>
 
