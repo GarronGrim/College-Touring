@@ -1,0 +1,43 @@
+[
+    {
+        "classes": [
+            {
+                "className": "CollegeModel",
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "collegeName",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "setReferenceCollege",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "collegeName",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "getSouvenirs",
+                        "returnType": "QVariantList"
+                    }
+                ],
+                "object": true,
+                "qualifiedClassName": "CollegeModel",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QAbstractListModel"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "collegemodel.h",
+        "outputRevision": 68
+    }
+]

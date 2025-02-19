@@ -1,0 +1,38 @@
+# ninja log v6
+3329	5096	7616411244862570	CMakeFiles/appCollege.dir/appCollege_autogen/mocs_compilation.cpp.obj	10bdde7ed082a7ab
+19	48	7616411212023170	C:/Users/Garron Grim/Desktop/College/build/College/Main.qml	c981065b94be37e8
+19	48	7616411212023170	College/Main.qml	c981065b94be37e8
+2418	2920	7616411240216479	appCollege_autogen/mocs_compilation.cpp	c567542d742ccc3e
+14	64	7616411212137257	.rcc/qmlcache/appCollege_qmlcache_loader.cpp	87ddbbea3ab4e305
+14	64	7616411212137257	C:/Users/Garron Grim/Desktop/College/build/.rcc/qmlcache/appCollege_qmlcache_loader.cpp	87ddbbea3ab4e305
+23	2418	7616411235702345	C:/Users/Garron Grim/Desktop/College/build/.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	9073a75009d3e7d4
+23	2418	7616411235702345	.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	9073a75009d3e7d4
+2418	2920	7616411240216479	appCollege_autogen/timestamp	c567542d742ccc3e
+3341	5584	7616411244991520	CMakeFiles/appCollege.dir/build/.rcc/qmlcache/appCollege_Main_qml.cpp.obj	5bd4bc20581135d4
+2418	2920	7616411240216479	C:/Users/Garron Grim/Desktop/College/build/appCollege_autogen/timestamp	c567542d742ccc3e
+2418	2920	7616411240216479	C:/Users/Garron Grim/Desktop/College/build/appCollege_autogen/mocs_compilation.cpp	c567542d742ccc3e
+2925	2948	7616411241020002	.rcc/qrc_qmake_College.cpp	6283c45114e63bd8
+3337	5282	7616411244946883	CMakeFiles/appCollege.dir/collegemodel.cpp.obj	f11f6249adbe63ec
+2925	2948	7616411241020002	C:/Users/Garron Grim/Desktop/College/build/.rcc/qrc_qmake_College.cpp	6283c45114e63bd8
+2929	2950	7616411241034877	.rcc/qrc_appCollege_raw_qml_0.cpp	853cbdf113d2c292
+2929	2950	7616411241034877	C:/Users/Garron Grim/Desktop/College/build/.rcc/qrc_appCollege_raw_qml_0.cpp	853cbdf113d2c292
+2920	2956	7616411241099360	meta_types/appCollege_json_file_list.txt	57aa3f42ea2d7c69
+2920	2956	7616411241099360	meta_types/appCollege_json_file_list.txt.timestamp	57aa3f42ea2d7c69
+3331	5396	7616411244882401	CMakeFiles/appCollege.dir/main.cpp.obj	5e478db12517986e
+2920	2956	7616411241099360	C:/Users/Garron Grim/Desktop/College/build/meta_types/appCollege_json_file_list.txt	57aa3f42ea2d7c69
+2920	2956	7616411241099360	C:/Users/Garron Grim/Desktop/College/build/meta_types/appCollege_json_file_list.txt.timestamp	57aa3f42ea2d7c69
+2956	2988	7616411241416807	meta_types/qt6appcollege_debug_metatypes.json.gen	88f31e4747b748e1
+2956	2988	7616411241416807	meta_types/qt6appcollege_debug_metatypes.json	88f31e4747b748e1
+3126	3329	7616411244753456	.rcc/qmlcache/appCollege_Main_qml.cpp	56839772a314675a
+2956	2988	7616411241416807	C:/Users/Garron Grim/Desktop/College/build/meta_types/qt6appcollege_debug_metatypes.json.gen	88f31e4747b748e1
+2956	2988	7616411241416807	C:/Users/Garron Grim/Desktop/College/build/meta_types/qt6appcollege_debug_metatypes.json	88f31e4747b748e1
+2988	3126	7616411242511282	C:/Users/Garron Grim/Desktop/College/build/appcollege_qmltyperegistrations.cpp	a567c7bda578c62e
+2988	3126	7616411242511282	appcollege_qmltyperegistrations.cpp	a567c7bda578c62e
+2988	3126	7616411242511282	College/appCollege.qmltypes	a567c7bda578c62e
+2988	3126	7616411242511282	C:/Users/Garron Grim/Desktop/College/build/College/appCollege.qmltypes	a567c7bda578c62e
+3126	3329	7616411244753456	C:/Users/Garron Grim/Desktop/College/build/.rcc/qmlcache/appCollege_Main_qml.cpp	56839772a314675a
+3335	3382	7616411244927044	CMakeFiles/appCollege.dir/build/.rcc/qrc_qmake_College.cpp.obj	31f843fedf222625
+3343	3389	7616411245011362	CMakeFiles/appCollege.dir/build/.rcc/qrc_appCollege_raw_qml_0.cpp.obj	7611c64341ae731c
+3333	4805	7616411244902245	CMakeFiles/appCollege.dir/appcollege_qmltyperegistrations.cpp.obj	5cd991ab4d7e0594
+3339	5189	7616411244966726	CMakeFiles/appCollege.dir/build/.rcc/qmlcache/appCollege_qmlcache_loader.cpp.obj	6e5d850aa27c9644
+5584	6254	7616411267415662	appCollege.exe	69ec5f5014af5790

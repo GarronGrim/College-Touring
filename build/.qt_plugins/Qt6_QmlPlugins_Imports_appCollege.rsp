@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/Garron Grim/Desktop/College
+-cmake-output
+-output-file
+C:/Users/Garron Grim/Desktop/College/build/.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake
+-importPath
+C:/Users/Garron Grim/Desktop/College/build/College
+-importPath
+C:/Users/Garron Grim/Desktop/College/build
+-importPath
+C:/Qt/6.6.2/mingw_64/./qml
+-qrcFiles
+C:/Users/Garron Grim/Desktop/College/build/.rcc/qmake_College.qrc
+C:/Users/Garron Grim/Desktop/College/build/.rcc/appCollege_raw_qml_0.qrc

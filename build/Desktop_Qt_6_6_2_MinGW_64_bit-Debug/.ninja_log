@@ -1,0 +1,104 @@
+# ninja log v6
+32	53	7610983998350841	College/Main.qml	733ea6f64460c837
+29	130	7610979498427393	appCollege_autogen/mocs_compilation.cpp	ac735062cb7e7daf
+29	130	7610979498427393	appCollege_autogen/timestamp	ac735062cb7e7daf
+37	143	7610983999238686	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+131	156	7610979499662435	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/meta_types/appCollege_json_file_list.txt	a35b35bc6361b25f
+32	53	7610983998350841	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/College/Main.qml	733ea6f64460c837
+29	130	7610979498427393	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/appCollege_autogen/timestamp	ac735062cb7e7daf
+37	143	7610983999238686	.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+126	154	7610582327036679	.rcc/qmlcache/appCollege_qmlcache_loader.cpp	d1ab11b7ae703de4
+126	154	7610582327036679	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_qmlcache_loader.cpp	d1ab11b7ae703de4
+29	130	7610979498427393	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/appCollege_autogen/mocs_compilation.cpp	ac735062cb7e7daf
+398	2061	7610946126488614	CMakeFiles/appCollege.dir/collegemodel.cpp.obj	f4564bc194e11346
+156	184	7610979499692194	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/meta_types/qt6appcollege_debug_metatypes.json.gen	803692e36aad9b61
+680	702	7610582332532649	.rcc/qrc_qmake_College.cpp	489703ae2c189e06
+184	1903	7610979499974915	CMakeFiles/appCollege.dir/main.cpp.obj	718c03c033f44799
+131	156	7610979499662435	meta_types/appCollege_json_file_list.txt.timestamp	a35b35bc6361b25f
+680	702	7610582332532649	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_qmake_College.cpp	489703ae2c189e06
+131	156	7610979499662435	meta_types/appCollege_json_file_list.txt	a35b35bc6361b25f
+131	156	7610979499662435	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/meta_types/appCollege_json_file_list.txt.timestamp	a35b35bc6361b25f
+148	168	7610983999496600	.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+148	168	7610983999496600	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+156	184	7610979499692194	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/meta_types/qt6appcollege_debug_metatypes.json	803692e36aad9b61
+156	184	7610979499692194	meta_types/qt6appcollege_debug_metatypes.json.gen	803692e36aad9b61
+143	249	7610984000230687	.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+156	184	7610979499692194	meta_types/qt6appcollege_debug_metatypes.json	803692e36aad9b61
+733	805	7610582333311362	appcollege_qmltyperegistrations.cpp	feba775bcedafff8
+733	805	7610582333311362	College/appCollege.qmltypes	feba775bcedafff8
+733	805	7610582333311362	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/appcollege_qmltyperegistrations.cpp	feba775bcedafff8
+880	2405	7610582334356368	CMakeFiles/appCollege.dir/appCollege_autogen/mocs_compilation.cpp.obj	ef5d3c0f33e56e1d
+733	805	7610582333311362	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/College/appCollege.qmltypes	feba775bcedafff8
+143	249	7610984000230687	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+886	926	7610582334410926	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_qmake_College.cpp.obj	2c8472ef536ae48
+251	291	7610984000364605	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp.obj	9002e7895be04189
+884	2217	7610582334396048	CMakeFiles/appCollege.dir/appcollege_qmltyperegistrations.cpp.obj	778bdf20aa67d28
+249	2166	7610984000344765	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp.obj	20486c27b82c509d
+889	2613	7610582334450610	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_qmlcache_loader.cpp.obj	781e573b26484494
+2166	2762	7610984019510203	appCollege.exe	b50617e1cb8b57eb
+29	50	7610984195820069	College/Main.qml	733ea6f64460c837
+29	50	7610984195820069	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/College/Main.qml	733ea6f64460c837
+34	139	7610984196696983	.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+34	139	7610984196696983	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+143	163	7610984196949956	.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+143	163	7610984196949956	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+139	239	7610984197639389	.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+139	239	7610984197639389	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+241	276	7610984197764188	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp.obj	9002e7895be04189
+239	2141	7610984197744347	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp.obj	20486c27b82c509d
+2141	2738	7610984216761687	appCollege.exe	b50617e1cb8b57eb
+28	49	7610984556106800	College/Main.qml	733ea6f64460c837
+28	49	7610984556106800	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/College/Main.qml	733ea6f64460c837
+33	139	7610984556982862	.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+33	139	7610984556982862	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+143	163	7610984557235321	.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+143	163	7610984557235321	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+139	239	7610984557924758	.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+139	239	7610984557924758	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+241	275	7610984558048758	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp.obj	9002e7895be04189
+239	2139	7610984558033877	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp.obj	20486c27b82c509d
+2139	2749	7610984577035627	appCollege.exe	b50617e1cb8b57eb
+28	49	7610984859880065	College/Main.qml	733ea6f64460c837
+28	49	7610984859880065	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/College/Main.qml	733ea6f64460c837
+33	138	7610984860757990	.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+33	138	7610984860757990	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+142	163	7610984861015917	.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+142	163	7610984861015917	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+138	240	7610984861710311	.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+138	240	7610984861710311	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+242	275	7610984861839578	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp.obj	9002e7895be04189
+240	2129	7610984861819742	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp.obj	20486c27b82c509d
+2130	2732	7610984880717327	appCollege.exe	b50617e1cb8b57eb
+29	51	7610984952758401	College/Main.qml	733ea6f64460c837
+29	51	7610984952758401	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/College/Main.qml	733ea6f64460c837
+34	140	7610984953641283	.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+34	140	7610984953641283	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+144	166	7610984953899197	.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+144	166	7610984953899197	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+140	247	7610984954648161	.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+140	247	7610984954648161	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+249	282	7610984954771115	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp.obj	9002e7895be04189
+247	2150	7610984954751265	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp.obj	20486c27b82c509d
+2150	2755	7610984973782774	appCollege.exe	b50617e1cb8b57eb
+28	49	7610985646346403	College/Main.qml	733ea6f64460c837
+28	49	7610985646346403	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/College/Main.qml	733ea6f64460c837
+34	139	7610985647224332	.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+34	139	7610985647224332	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+143	163	7610985647477286	.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+143	163	7610985647477286	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+139	240	7610985648176659	.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+139	240	7610985648176659	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+242	276	7610985648300639	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp.obj	9002e7895be04189
+240	2174	7610985648280802	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp.obj	20486c27b82c509d
+2174	2760	7610985667624790	appCollege.exe	b50617e1cb8b57eb
+30	51	7610985919215760	College/Main.qml	733ea6f64460c837
+30	51	7610985919215760	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/College/Main.qml	733ea6f64460c837
+35	141	7610985920098542	.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+35	141	7610985920098542	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.qt_plugins/Qt6_QmlPlugins_Imports_appCollege.cmake	b3da6049bcfc7a3c
+145	165	7610985920351509	.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+145	165	7610985920351509	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp	2038e4691e9d5559
+141	242	7610985921040942	.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+141	242	7610985921040942	C:/Users/Garron Grim/Documents/College/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp	6dbcd1b80d42e891
+243	277	7610985921169281	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qrc_appCollege_raw_qml_0.cpp.obj	9002e7895be04189
+242	2173	7610985921149446	CMakeFiles/appCollege.dir/build/Desktop_Qt_6_6_2_MinGW_64_bit-Debug/.rcc/qmlcache/appCollege_Main_qml.cpp.obj	20486c27b82c509d
+2173	2775	7610985940458711	appCollege.exe	b50617e1cb8b57eb
