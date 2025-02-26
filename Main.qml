@@ -30,9 +30,16 @@ ApplicationWindow {
             model: collegeModel
             textRole: "name"
 
-            onCurrentIndexChanged: {
+            onCurrentTextChanged: {
                 console.log("Current index:", currentIndex);
                 console.log("Current text:", currentText);
+                if(currentIndex >= 0)
+                {
+                    var selectedCollege = referenceCollegeDropdown.currentText;
+                    console.log("Selected College: ", selectedCollege);
+                    
+                    collegeModel.calculateShortestTrip(selectedCollege)
+                }
             }
 
             background: Rectangle {
@@ -43,6 +50,7 @@ ApplicationWindow {
             }
 
             contentItem: Text {
+                id: referenceCollegeDropdownText
                 text: referenceCollegeDropdown.currentIndex >= 0 ? referenceCollegeDropdown.currentText : "Select College"
                 color: "#E0E0E0"
                 font.pixelSize: fontScale

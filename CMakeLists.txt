@@ -4,12 +4,19 @@ project(College VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Enable Qt MOC, UIC, and RCC automatic processing
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
 qt_add_executable(appCollege
     main.cpp
+    collegemodel.h
+    collegemodel.cpp
 )
 
 qt_add_qml_module(appCollege

@@ -1,12 +1,17 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "CollegeModel.h"
+#include <iostream>
+#include "collegemodel.h"
+
+using namespace std;
 
 int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
 
     CollegeModel model;
+
+    QTextStream(stdout) << "string to print";
 
     //Sample data
     // College college1;
@@ -213,9 +218,34 @@ int main(int argc, char *argv[]) {
         {"Water Bottle", 17.99}
     };
     model.addCollege(college9);
+    
+    College college10;
+    college10.name = "University of the Pacific";
+    college10.distances = {
+        {"Arizona State university", 720},
+        {"MIT", 3057},
+        {"Northwestern", 2102},
+        {"Ohio State University", 2412},
+        {"Saddleback College", 390},
+        {"University of Michigan", 2318},
+        {"UCI", 383},
+        {"UCLA", 333},
+        {"University of Oregon", 517},
+        {"University of Wisconsin", 2052}
+    };
+    college1.souvenirs = {
+        {"Mug", 12.99},
+        {"T-Shirt", 25.50}
+    };
+    model.addCollege(college10);
+
+  
+    CollegeModel* collegeModel = new CollegeModel(nullptr);
+    auto trip = collegeModel->getShortestTrip();
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("collegeModel", &model);  // Expose collegeModel
+    //engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     engine.loadFromModule("College", "Main");
 
     if (engine.rootObjects().isEmpty())
