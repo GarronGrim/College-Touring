@@ -11,16 +11,78 @@ ApplicationWindow {
     property real spacing: width / 20
     property real fontScale: Math.min(width, height) * 0.025
 
-    Rectangle {
-        anchors.fill: parent
-        color: "#212121"
+    ListModel { id: collegeModel }
+    ListModel { id: distanceModel }
+    ListModel { id: souvenirModel }
+
+    function loadColleges() {
+        console.log("Fetching colleges from database...");
+        var data = dbManager.fetchColleges();
+
+        if (!data || data.length === 0) {
+            console.log("No colleges found in database.");
+            return;
+        }
+
+        console.log("Fetched colleges count:", data.length);
+        collegeModel.clear();
+
+        let uniqueColleges = new Set();
+
+        for (var i = 0; i < data.length; i++) {
+            if (!uniqueColleges.has(data[i].name)) {
+                uniqueColleges.add(data[i].name);
+                collegeModel.append({ "name": data[i].name });
+                console.log("Added college:", data[i].name);
+            }
+        }
+
+        if (collegeModel.count > 0) {
+            referenceCollegeDropdown.currentIndex = 0;
+            loadCollegeData(collegeModel.get(0).name);
+        }
     }
+
+    function loadCollegeData(collegeName) {
+        console.log("Fetching data for:", collegeName);
+        distanceModel.clear();
+        souvenirModel.clear();
+
+        // **Fetch distances**
+        var distances = dbManager.fetchDistances(collegeName);
+        if (distances && distances.length > 0) {
+            for (var i = 0; i < distances.length; i++) {
+                distanceModel.append({
+                    "ending_college": distances[i].ending_college,
+                    "distance": distances[i].distance
+                });
+            }
+        }
+
+        // **Fetch souvenirs**
+        var souvenirs = souvenirDB.fetchSouvenirs(collegeName);
+        if (souvenirs && souvenirs.length > 0) {
+            for (var j = 0; j < souvenirs.length; j++) {
+                souvenirModel.append({
+                    "souvenir": souvenirs[j].souvenir,
+                    "price": souvenirs[j].price.replace("$", "") // Ensure prices are formatted properly
+                });
+            }
+        }
+
+        console.log("Data loaded for:", collegeName, "- Distances:", distanceModel.count, "- Souvenirs:", souvenirModel.count);
+    }
+
+    Component.onCompleted: {
+        console.log("Initializing college list...");
+        loadColleges();
+    }
+
     Rectangle {
         id: contentArea
         anchors.fill: parent
         anchors.margins: spacing
         color: "#212121"
-
 
         ComboBox {
             id: referenceCollegeDropdown
@@ -30,165 +92,16 @@ ApplicationWindow {
             model: collegeModel
             textRole: "name"
 
-            onCurrentIndexChanged: {
-                console.log("Current index:", currentIndex);
-                console.log("Current text:", currentText);
-            }
-
-            background: Rectangle {
-                color: "#333333"
-                radius: 5
-                border.color: "#555555"
-                border.width: 1
-            }
-
-            contentItem: Text {
-                text: referenceCollegeDropdown.currentIndex >= 0 ? referenceCollegeDropdown.currentText : "Select College"
-                color: "#E0E0E0"
-                font.pixelSize: fontScale
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                anchors.fill: parent
-            }
-
-            delegate: ItemDelegate {
-                width: referenceCollegeDropdown.width
-                height: 40
-
-                contentItem: Text {
-                    text: model.name
-                    color: "#E0E0E0"
-                    font.pixelSize: fontScale
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    anchors.fill: parent
-                }
-
-                background: Rectangle {
-                    width: referenceCollegeDropdown.width
-                    height: parent.height
-                    color: highlighted ? "#444444" : "#222222"
-                    border.color: highlighted ? "#666666" : "transparent"
-                }
-            }
-
-            popup: Popup {
-                id: dropdownPopup
-                y: referenceCollegeDropdown.height
-                width: referenceCollegeDropdown.width
-                implicitHeight: Math.min(200, referenceCollegeDropdown.count * 40)
-                padding: 0
-
-                background: Rectangle {
-                    width: referenceCollegeDropdown.width
-                    height: dropdownPopup.implicitHeight
-                    color: "#222222"
-                    border.color: "#444444"
-                    radius: 5
-                }
-
-                contentItem: ListView {
-                    width: referenceCollegeDropdown.width
-                    height: dropdownPopup.implicitHeight
-                    model: referenceCollegeDropdown.model
-
-                    delegate: ItemDelegate {
-                        width: referenceCollegeDropdown.width
-                        height: 40
-
-                        contentItem: Text {
-                            text: model.name
-                            color: "#E0E0E0"
-                            font.pixelSize: 14
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            anchors.fill: parent
-                        }
-
-                        background: Rectangle {
-                            width: referenceCollegeDropdown.width
-                            height: parent.height
-                            color: highlighted ? "#444444" : "#222222"
-                            border.color: highlighted ? "#666666" : "transparent"
-                        }
-
-                        onClicked: {
-                            console.log("Clicked index:", index, "Name:", model.name);
-                            referenceCollegeDropdown.currentIndex = index;
-                            collegeModel.setReferenceCollege(model.name);
-                            dropdownPopup.close();
-                        }
-                    }
+            onCurrentTextChanged: {
+                if (currentIndex >= 0) {
+                    var selectedCollege = referenceCollegeDropdown.currentText;
+                    console.log("Selected College: ", selectedCollege);
+                    loadCollegeData(selectedCollege);
                 }
             }
         }
 
-        ComboBox {
-            id: modeSelectionDropdown
-            anchors.top: parent.top
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width / 6
-            model: ["Default", "Custom"]
-
-            background: Rectangle {
-                color: "#333333"
-                radius: 5
-                border.color: "#555555"
-                border.width: 1
-            }
-
-            contentItem: Text {
-                text: modeSelectionDropdown.displayText
-                color: "#E0E0E0"
-                font.pixelSize: fontScale
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                anchors.fill: parent
-            }
-
-            delegate: ItemDelegate {
-                width: modeSelectionDropdown.width
-                height: 40
-
-                contentItem: Text {
-                    text: modelData
-                    color: "#E0E0E0"
-                    font.pixelSize: 14
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    anchors.fill: parent
-                }
-
-                background: Rectangle {
-                    width: modeSelectionDropdown.width
-                    height: parent.height
-                    color: highlighted ? "#444444" : "#222222"
-                    border.color: highlighted ? "#666666" : "transparent"
-                }
-            }
-        }
-
-        Rectangle {
-            id: planTrip
-            anchors.top: parent.top
-            anchors.right: parent.right
-            width: parent.width / 6
-            height: 40
-            color: "#333333"
-            radius: 5
-            border.color: "#555555"
-            border.width: 1
-
-            Text {
-                text: "Plan Trip!"
-                color: "#E0E0E0"
-                font.pixelSize: fontScale
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                anchors.fill: parent
-            }
-        }
-
+        // **Distance List**
         Flickable {
             id: flickable1
             anchors.top: referenceCollegeDropdown.bottom
@@ -203,7 +116,8 @@ ApplicationWindow {
                 id: collegeList
                 width: parent.width
                 height: contentHeight
-                model: collegeModel
+                model: distanceModel
+
                 delegate: Rectangle {
                     width: parent.width
                     height: 50
@@ -212,26 +126,16 @@ ApplicationWindow {
                     radius: 5
 
                     Text {
-                        text: model.name + " - Distance: " + model.distance
+                        text: model.ending_college + " - Distance: " + model.distance + " mi"
                         color: "#E0E0E0"
                         font.pixelSize: fontScale
                         anchors.centerIn: parent
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            souvenirModel.clear()
-                            var souvenirs = collegeModel.getSouvenirs(model.name)
-                            for (var i = 0; i < souvenirs.length; i++) {
-                                souvenirModel.append(souvenirs[i])
-                            }
-                        }
                     }
                 }
             }
         }
 
+        // **Souvenirs List**
         Flickable {
             id: flickable2
             anchors.top: referenceCollegeDropdown.bottom
@@ -247,185 +151,22 @@ ApplicationWindow {
                 id: souvenirList
                 width: parent.width
                 height: contentHeight
-                model: ListModel { id: souvenirModel }
+                model: souvenirModel
+
                 delegate: Rectangle {
                     width: parent.width
                     height: 50
-                    color: "#333333"
-                    border.color: "#555555"
+                    color: "#444444"
+                    border.color: "#666666"
                     radius: 5
 
                     Text {
-                        text: model.name + " - $" + model.price
+                        text: model.souvenir + " - $" + model.price
                         color: "#E0E0E0"
                         font.pixelSize: fontScale
                         anchors.centerIn: parent
                     }
                 }
-            }
-        }
-
-        Rectangle {
-            id: summaryTable
-            anchors.top: referenceCollegeDropdown.bottom
-            anchors.topMargin: spacing
-            anchors.left: flickable2.right
-            anchors.leftMargin: spacing
-            height: parent.height - referenceCollegeDropdown.height - 2 * spacing
-            width: (parent.width - 2 * spacing) / 3
-            color: "#1E1E1E"
-            border.color: "#444444"
-            radius: 5
-
-            Column {
-                anchors.fill: parent
-                spacing: 2
-
-                Rectangle {
-                    width: parent.width
-                    height: parent.height / 12
-                    color: "#333333"
-
-                    Row {
-                        anchors.fill: parent
-                        spacing: 2
-
-                        Text {
-                            text: "Name"
-                            color: "#E0E0E0"
-                            font.pixelSize: fontScale
-                            width: parent.width / 3
-                            horizontalAlignment: Text.AlignHCenter
-                        }
-                        Text {
-                            text: "# of Souvenirs"
-                            color: "#E0E0E0"
-                            font.pixelSize: fontScale
-                            width: parent.width / 3
-                            horizontalAlignment: Text.AlignHCenter
-                        }
-                        Text {
-                            text: "$ Spent"
-                            color: "#E0E0E0"
-                            font.pixelSize: fontScale
-                            width: parent.width / 3
-                            horizontalAlignment: Text.AlignHCenter
-                        }
-                    }
-                }
-
-                Repeater {
-                    model: 10
-                    delegate: Rectangle {
-                        width: summaryTable.width
-                        height: parent.height / 12
-                        color: index % 2 === 0 ? "#222222" : "#2E2E2E"
-                        border.color: "#444444"
-
-                        Row {
-                            anchors.fill: parent
-                            spacing: 2
-
-                            Text {
-                                text: ""
-                                color: "#E0E0E0"
-                                font.pixelSize: fontScale
-                                width: parent.width / 3
-                                horizontalAlignment: Text.AlignHCenter
-                            }
-                            Text {
-                                text: ""
-                                color: "#E0E0E0"
-                                font.pixelSize: fontScale
-                                width: parent.width / 3
-                                horizontalAlignment: Text.AlignHCenter
-                            }
-                            Text {
-                                text: ""
-                                color: "#E0E0E0"
-                                font.pixelSize: 14
-                                width: parent.width / 3
-                                horizontalAlignment: Text.AlignHCenter
-                            }
-                        }
-                    }
-                }
-
-                Rectangle {
-                    width: parent.width
-                    height: parent.height / 12
-                    color: "#333333"
-
-                    Row {
-                        anchors.fill: parent
-                        spacing: 2
-
-                        Text {
-                            text: "Total:"
-                            color: "#E0E0E0"
-                            font.pixelSize: fontScale
-                            width: parent.width / 3
-                            horizontalAlignment: Text.AlignHCenter
-                        }
-                        Text {
-                            text: ""
-                            color: "#E0E0E0"
-                                            font.pixelSize: fontScale
-                            width: parent.width / 3
-                            horizontalAlignment: Text.AlignHCenter
-                        }
-                        Text {
-                            text: ""
-                            color: "#E0E0E0"
-                            font.pixelSize: fontScale
-                            width: parent.width / 3
-                            horizontalAlignment: Text.AlignHCenter
-                        }
-                    }
-                }
-            }
-        }
-
-        Rectangle {
-            id: nextDestination
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            width: parent.width / 6
-            height: referenceCollegeDropdown.height
-            color: "#333333"
-            radius: 5
-            border.color: "#555555"
-            border.width: 1
-
-            Text {
-                text: "Next Destination"
-                color: "#E0E0E0"
-                font.pixelSize: fontScale
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                anchors.fill: parent
-            }
-        }
-
-
-        Rectangle {
-            id: totalDistance
-            anchors.left: nextDestination.right
-            anchors.bottom: parent.bottom
-            width: parent.width / 6
-            height: referenceCollegeDropdown.height
-            color: "#333333"
-            radius: 5
-            border.color: "#555555"
-            border.width: 1
-
-            Text {
-                text: "Total Distance: 0"
-                color: "#E0E0E0"
-                font.pixelSize: fontScale
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                anchors.fill: parent
             }
         }
     }

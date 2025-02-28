@@ -1,37 +1,28 @@
-#include <QCoreApplication>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlError>
-#include <QDebug>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include "DatabaseManager.h"
+#include "SouvenirDatabaseManager.h"
 
 int main(int argc, char *argv[]) {
-    QCoreApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
+    QQmlApplicationEngine engine;
 
-    // Open SQLite database
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("colleges.db");  // Change to your database file
+    // College distances database manager
+    DatabaseManager dbManager;
 
-    if (!db.open()) {
-        qDebug() << "Error: Could not open database!" << db.lastError().text();
+    // Souvenirs database manager
+    SouvenirDatabaseManager souvenirDB;
+
+    // Expose both database managers to QML
+    engine.rootContext()->setContextProperty("dbManager", &dbManager);
+    engine.rootContext()->setContextProperty("souvenirDB", &souvenirDB);
+
+    // Load the QML UI
+    engine.loadFromModule("College", "Main");
+
+    if (engine.rootObjects().isEmpty())
         return -1;
-    }
 
-    // Query data
-    QSqlQuery query;
-    if (!query.exec("SELECT * FROM colleges;")) {
-        qDebug() << "Query failed: " << query.lastError().text();
-        return -1;
-    }
-
-    // Display results
-    while (query.next()) {
-        QString start = query.value(0).toString();
-        QString end = query.value(1).toString();
-        double distance = query.value(2).toDouble();
-
-        qDebug() << "Start:" << start << "| End:" << end << "| Distance:" << distance;
-    }
-
-    db.close();
     return app.exec();
 }
