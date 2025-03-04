@@ -9,7 +9,8 @@
 #include <QDebug>
 #include <QSqlRecord>
 
-class SouvenirDatabaseManager : public QObject {
+class SouvenirDatabaseManager : public QObject
+{
     Q_OBJECT
 public:
     explicit SouvenirDatabaseManager(QObject *parent = nullptr);

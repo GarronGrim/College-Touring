@@ -8,7 +8,8 @@
 #include <QVariantList>
 #include <QDebug>
 
-class DatabaseManager : public QObject {
+class DatabaseManager : public QObject
+{
     Q_OBJECT
 public:
     explicit DatabaseManager(QObject *parent = nullptr);

@@ -21,7 +21,6 @@ qt_add_qml_module(appCollege
     VERSION 1.0
     QML_FILES
         Main.qml
-    SOURCES collegemodel.h collegemodel.cpp
     SOURCES databasemanager.h databasemanager.cpp
     RESOURCES
     SOURCES souvenirdatabasemanager.h souvenirdatabasemanager.cpp
