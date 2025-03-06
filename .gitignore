@@ -1,5 +1,7 @@
 # Ignore CMake build folder
-build/
+build/*
+!build/collegedistances.csv
+!build/souvenirslist.csv
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
