@@ -43,6 +43,12 @@ public:
     // Initial import from csv files 
     bool importCSV(const QString& filePath, const QString& tableName, const QStringList& columns);
 
+    // Given a reference college and an ending college, return the distance.
+    double getDistance(const QString& startCollege, const QString& endCollege);
+
+    // Import new campuses CSV file into the Distances table.
+    bool importNewCampuses(const QString& filePath);
+
 private:
     QSqlDatabase db;
     void initializeTables();

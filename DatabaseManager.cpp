@@ -22,6 +22,9 @@ DatabaseManager::~DatabaseManager() {
 
 void DatabaseManager::initializeTables() {
     QSqlQuery query;
+
+    query.exec("DROP TABLE IF EXISTS Distances");
+    query.exec("DROP TABLE IF EXISTS Souvenirs");
     
     // Create the Distances table with a composite primary key
     if (!query.exec("CREATE TABLE IF NOT EXISTS Distances ("
@@ -121,7 +124,6 @@ bool DatabaseManager::importCSV(const QString &filePath, const QString &tableNam
 
 std::vector<QString> DatabaseManager::getColleges() {
     std::vector<QString> colleges;
-    // Now only selecting distinct start_college from the Distances table.
     QSqlQuery query("SELECT DISTINCT start_college FROM Distances");
     while (query.next()) {
         colleges.push_back(query.value(0).toString());
@@ -193,4 +195,23 @@ bool DatabaseManager::removeSouvenir(const QString& souvenir) {
         return false;
     }
     return true;
+}
+
+double DatabaseManager::getDistance(const QString& startCollege, const QString& endCollege) {
+    double distance = std::numeric_limits<double>::max();
+    QSqlQuery query;
+    query.prepare("SELECT distance FROM Distances WHERE start_college = ? AND end_college = ?");
+    query.addBindValue(startCollege);
+    query.addBindValue(endCollege);
+    if(query.exec() && query.next()) {
+        distance = query.value(0).toDouble();
+    } else {
+        qDebug() << "getDistance query failed:" << query.lastError().text();
+    }
+    return distance;
+}
+
+bool DatabaseManager::importNewCampuses(const QString &filePath) {
+    QStringList columns = {"start_college", "end_college", "distance"};
+    return importCSV(filePath, "Distances", columns);
 }

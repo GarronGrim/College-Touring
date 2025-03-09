@@ -2,6 +2,7 @@
 build/*
 !build/collegedistances.csv
 !build/souvenirslist.csv
+!build/newcampuses.csv
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
