@@ -22,7 +22,6 @@ private:
     std::vector<std::vector<double>> memo;
     // Table to reconstruct the optimal path: nextNode[current][mask]
     std::vector<std::vector<int>> nextNode;
-
     // Recursive TSP helper using DP with bitmasking.
     double tspHelper(int mask, int curr, const std::vector<std::vector<double>> &cost);
     // Reconstructs the optimal path (as a vector of indices) based on nextNode.
@@ -31,12 +30,10 @@ private:
 public:
     TripPlanner();
     // Given a list of colleges and a pointer to the database manager,
-    // build the cost matrix by calling dbManager->getDistances(college)
-    // for each college (filtering out distances to colleges not in the list),
-    // then calculate the optimal trip.
+    // calculates the optimal trip and total distance to be called with getTotalDistance and getPath.
     void calculateTrip(const std::vector<QString>& colleges, DatabaseManager* dbManager);
     // Returns the total distance (cost) of the most recent trip.
-    double getTotalCost();
+    double getTotalDistance();
     // Returns the optimal trip as a list of college names.
     std::vector<QString> getPath();
 };

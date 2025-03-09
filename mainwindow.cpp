@@ -1,12 +1,20 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "TripPlanner.h"
+
+#include <QCoreApplication>
+#include <QDebug>
+#include <QMessageBox>
+#include <QListWidgetItem>
+#include <algorithm>   
+#include <vector>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), listLocked(false)
 {
     ui->setupUi(this);
 
-    // Initialize DatabaseManager (assumes campus.db is in the working directory).
+    // Initialize DatabaseManager (assumes campus.db is in the working directory (build)).
     dbManager = new DatabaseManager("campus.db");
 
     QString appDir = QCoreApplication::applicationDirPath();
@@ -29,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     // Populate the combo box with colleges from the database.
-    populateColleges();
+    updateCollegeComboBox();
 
     // Connect signals:
     connect(ui->comboBoxColleges, &QComboBox::currentTextChanged,
@@ -40,59 +48,66 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::onLockButtonClicked);
 }
 
-// Destructor
 MainWindow::~MainWindow() {
     delete dbManager;
     delete ui;
-}
-
-void MainWindow::populateColleges() {
-    std::vector<QString> colleges = dbManager->getColleges();
-    ui->comboBoxColleges->clear();
-    for (const auto &college : colleges) {
-        ui->comboBoxColleges->addItem(college);
-    }
-    if (!colleges.empty()) {
-        // Display distances for the first college by default.
-        updateDistanceList(colleges.front());
-    }
 }
 
 void MainWindow::onCollegeChanged(const QString &college) {
     updateDistanceList(college);
 }
 
-std::vector<std::pair<QString, double>> MainWindow::calculateShortestTrip(DatabaseManager* dbManager, const QString& startCollege) {
-    // Get direct distances from the start college to all other colleges.
-    std::vector<std::pair<QString, double>> distances = dbManager->getDistances(startCollege);
-
-    distances.insert(distances.begin(), {startCollege, 0.0});
-
-    return distances;
+void MainWindow::updateCollegeComboBox() {
+    ui->comboBoxColleges->clear();
+    std::vector<QString> colleges = dbManager->getColleges();
+    for (const QString &college : colleges) {
+        ui->comboBoxColleges->addItem(college);
+    }
+    if (!colleges.empty()) {
+        updateDistanceList(colleges.front());
+    }
 }
 
 void MainWindow::updateDistanceList(const QString &college) {
+    // Retrieve all colleges from the database.
+    std::vector<QString> colleges = dbManager->getColleges();
+
+    // Reorder the list so that the selected college is the starting point.
+    auto it = std::find(colleges.begin(), colleges.end(), college);
+    if (it != colleges.end()) {
+        std::iter_swap(colleges.begin(), it);
+    }
+
+    // Use TripPlanner to calculate the optimal trip.
+    TripPlanner planner;
+    planner.calculateTrip(colleges, dbManager);
+    double totalDistance = planner.getTotalDistance();
+    std::vector<QString> tripPath = planner.getPath();
+
+    // Clear the list widget.
     ui->listWidgetDistances->clear();
-    
-    // Retrieve distances (for each college, the distance from the reference college).
-    std::vector<std::pair<QString, double>> distances = calculateShortestTrip(dbManager, college);
-    
-    // Sort the list in ascending order based on the distance.
-    std::sort(distances.begin(), distances.end(), [](const auto &a, const auto &b) {
-        return a.second < b.second;
-    });
-    
-    // Sum all the distances.
-    double totalDistance = 0.0;
-    for (const auto &pair : distances) {
-        totalDistance += pair.second;
-        QString text = QString("%1 - %2 miles").arg(pair.first).arg(pair.second);
-        QListWidgetItem *item = new QListWidgetItem(text);
+
+    // Display each leg of the trip with the distance.
+    double summedDistance = 0.0;
+    if (!tripPath.empty()) {
+        // First college: starting point.
+        QListWidgetItem *item = new QListWidgetItem(tripPath[0] + " (Start, 0 miles)");
         ui->listWidgetDistances->addItem(item);
     }
     
-    // Update the total distance label.
-    ui->labelTotalDistance->setText(QString("Total Distance: %1 miles").arg(totalDistance));
+    // For each subsequent college, show the distance from the previous college.
+    for (size_t i = 1; i < tripPath.size(); ++i) {
+        QString prev = tripPath[i - 1];
+        QString curr = tripPath[i];
+        double legDistance = dbManager->getDistance(prev, curr);
+        summedDistance += legDistance;
+        QString itemText = QString("%1 - %2 miles").arg(curr).arg(legDistance);
+        QListWidgetItem *item = new QListWidgetItem(itemText);
+        ui->listWidgetDistances->addItem(item);
+    }
+
+    // Update the total distance label with the summed distance (should match totalDistance if computed similarly).
+    ui->labelTotalDistance->setText(QString("Total Distance: %1 miles").arg(summedDistance));
 }
 
 void MainWindow::onDistanceItemClicked(QListWidgetItem *item) {
@@ -111,4 +126,18 @@ void MainWindow::onLockButtonClicked() {
     ui->listWidgetDistances->setDisabled(true);
     QMessageBox::information(this, "List Locked",
                              "All items have been locked and cannot be clicked.");
+}
+
+void MainWindow::on_importButton_clicked() {
+    // Construct the full path to newcampuses.csv in the executable's directory.
+    QString appDir = QCoreApplication::applicationDirPath();
+    QString csvFile = appDir + "/newcampuses.csv";
+    
+    if (dbManager->importNewCampuses(csvFile)) {
+        ui->statusbar->showMessage("New campuses imported successfully.", 3000);
+        // Refresh the college combo box to include any newly imported campuses (starts with first college in list selected).
+        updateCollegeComboBox();
+    } else {
+        ui->statusbar->showMessage("Failed to import new campuses.", 3000);
+    }
 }

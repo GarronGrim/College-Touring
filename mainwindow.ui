@@ -37,6 +37,16 @@
      </widget>
     </item>
     <item>
+     <widget class="QPushButton" name="importButton">
+      <property name="text">
+       <string>Import New Campuses</string>
+      </property>
+      <property name="toolTip">
+       <string>Import new campus distances from CSV</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QLabel" name="labelTotalDistance">
       <property name="text">
        <string>Total Trip Distance: 0 miles</string>

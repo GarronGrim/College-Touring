@@ -31,13 +31,14 @@ private slots:
     void onDistanceItemClicked(QListWidgetItem *item);
     // When the lock button is pressed, disable further clicking.
     void onLockButtonClicked();
+    // Imports new colleges
+    void on_importButton_clicked();
 
-    std::vector<std::pair<QString, double>> calculateShortestTrip(DatabaseManager* dbManager, const QString& startCollege);
 private:
     Ui::MainWindow *ui;
     DatabaseManager *dbManager;
     bool listLocked;
-    void populateColleges();
+    void updateCollegeComboBox();
     void updateDistanceList(const QString &college);
 };
 
