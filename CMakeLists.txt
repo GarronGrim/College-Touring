@@ -18,8 +18,6 @@ add_executable(${PROJECT_NAME}
     mainwindow.ui
     DatabaseManager.cpp
     DatabaseManager.h
-    TripPlanner.h
-    TripPlanner.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} Qt6::Widgets Qt6::Sql)

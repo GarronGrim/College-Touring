@@ -43,11 +43,21 @@ public:
     // Initial import from csv files 
     bool importCSV(const QString& filePath, const QString& tableName, const QStringList& columns);
 
-    // Given a reference college and an ending college, return the distance.
-    double getDistance(const QString& startCollege, const QString& endCollege);
+    void addCollegeDistanceMaintenance(const QString &startCollege, const QString &endCollege, double distance);
 
-    // Import new campuses CSV file into the Distances table.
-    bool importNewCampuses(const QString& filePath);
+    void addSouvenirMaintenance(const QString &collegeName, const QString &souvenirName, double price);
+
+    void updateSouvenir(const QString &college, const QString &souvenir, double newPrice);
+
+    void updateDistance(const QString &startCollege, const QString &endCollege, double newDistance);
+
+    void updateCollegeName(const QString &oldName, const QString &newName);
+
+    void deleteCollege(const QString &college);
+
+    void deleteDistance(const QString &startCollege, const QString &endCollege);
+
+    void deleteSouvenir(const QString &college, const QString &souvenir);
 
 private:
     QSqlDatabase db;

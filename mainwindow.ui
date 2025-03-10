@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>1018</width>
+    <height>654</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,19 +30,15 @@
      </widget>
     </item>
     <item>
+     <widget class="QListWidget" name="listWidgetSouvenirs"/>
+    </item>
+    <item>
+     <widget class="QListView" name="cartView"/>
+    </item>
+    <item>
      <widget class="QPushButton" name="lockButton">
       <property name="text">
        <string>Lock List</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="importButton">
-      <property name="text">
-       <string>Import New Campuses</string>
-      </property>
-      <property name="toolTip">
-       <string>Import new campus distances from CSV</string>
       </property>
      </widget>
     </item>
@@ -52,13 +48,46 @@
        <string>Total Trip Distance: 0 miles</string>
       </property>
       <property name="alignment">
-       <set>Qt::AlignCenter</set>
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="maintenanceButton">
+      <property name="minimumSize">
+       <size>
+        <width>839</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Maintenance Mode</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>10</width>
+        <height>10</height>
+       </size>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

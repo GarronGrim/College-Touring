@@ -1,0 +1,26 @@
+[
+{
+  "directory": "C:/Users/PC/Downloads/cmake-4.0.0-rc2-windows-x86_64/cmake-4.0.0-rc2-windows-x86_64/share/cmake-4.0/Help/prop_tgt/College-Touring-main/build",
+  "command": "C:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IC:/Users/PC/Downloads/cmake-4.0.0-rc2-windows-x86_64/cmake-4.0.0-rc2-windows-x86_64/share/cmake-4.0/Help/prop_tgt/College-Touring-main/build/CollegeManager_autogen/include -isystem C:/Qt/6.8.2/mingw_64/include/QtWidgets -isystem C:/Qt/6.8.2/mingw_64/include -isystem C:/Qt/6.8.2/mingw_64/include/QtCore -isystem C:/Qt/6.8.2/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.8.2/mingw_64/include/QtGui -isystem C:/Qt/6.8.2/mingw_64/include/QtSql -g -std=gnu++17 -o CMakeFiles\\CollegeManager.dir\\CollegeManager_autogen\\mocs_compilation.cpp.obj -c C:\\Users\\PC\\Downloads\\cmake-4.0.0-rc2-windows-x86_64\\cmake-4.0.0-rc2-windows-x86_64\\share\\cmake-4.0\\Help\\prop_tgt\\College-Touring-main\\build\\CollegeManager_autogen\\mocs_compilation.cpp",
+  "file": "C:\\Users\\PC\\Downloads\\cmake-4.0.0-rc2-windows-x86_64\\cmake-4.0.0-rc2-windows-x86_64\\share\\cmake-4.0\\Help\\prop_tgt\\College-Touring-main\\build\\CollegeManager_autogen\\mocs_compilation.cpp",
+  "output": "CMakeFiles\\CollegeManager.dir\\CollegeManager_autogen\\mocs_compilation.cpp.obj"
+},
+{
+  "directory": "C:/Users/PC/Downloads/cmake-4.0.0-rc2-windows-x86_64/cmake-4.0.0-rc2-windows-x86_64/share/cmake-4.0/Help/prop_tgt/College-Touring-main/build",
+  "command": "C:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IC:/Users/PC/Downloads/cmake-4.0.0-rc2-windows-x86_64/cmake-4.0.0-rc2-windows-x86_64/share/cmake-4.0/Help/prop_tgt/College-Touring-main/build/CollegeManager_autogen/include -isystem C:/Qt/6.8.2/mingw_64/include/QtWidgets -isystem C:/Qt/6.8.2/mingw_64/include -isystem C:/Qt/6.8.2/mingw_64/include/QtCore -isystem C:/Qt/6.8.2/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.8.2/mingw_64/include/QtGui -isystem C:/Qt/6.8.2/mingw_64/include/QtSql -g -std=gnu++17 -o CMakeFiles\\CollegeManager.dir\\main.cpp.obj -c C:\\Users\\PC\\Downloads\\cmake-4.0.0-rc2-windows-x86_64\\cmake-4.0.0-rc2-windows-x86_64\\share\\cmake-4.0\\Help\\prop_tgt\\College-Touring-main\\main.cpp",
+  "file": "C:\\Users\\PC\\Downloads\\cmake-4.0.0-rc2-windows-x86_64\\cmake-4.0.0-rc2-windows-x86_64\\share\\cmake-4.0\\Help\\prop_tgt\\College-Touring-main\\main.cpp",
+  "output": "CMakeFiles\\CollegeManager.dir\\main.cpp.obj"
+},
+{
+  "directory": "C:/Users/PC/Downloads/cmake-4.0.0-rc2-windows-x86_64/cmake-4.0.0-rc2-windows-x86_64/share/cmake-4.0/Help/prop_tgt/College-Touring-main/build",
+  "command": "C:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IC:/Users/PC/Downloads/cmake-4.0.0-rc2-windows-x86_64/cmake-4.0.0-rc2-windows-x86_64/share/cmake-4.0/Help/prop_tgt/College-Touring-main/build/CollegeManager_autogen/include -isystem C:/Qt/6.8.2/mingw_64/include/QtWidgets -isystem C:/Qt/6.8.2/mingw_64/include -isystem C:/Qt/6.8.2/mingw_64/include/QtCore -isystem C:/Qt/6.8.2/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.8.2/mingw_64/include/QtGui -isystem C:/Qt/6.8.2/mingw_64/include/QtSql -g -std=gnu++17 -o CMakeFiles\\CollegeManager.dir\\mainwindow.cpp.obj -c C:\\Users\\PC\\Downloads\\cmake-4.0.0-rc2-windows-x86_64\\cmake-4.0.0-rc2-windows-x86_64\\share\\cmake-4.0\\Help\\prop_tgt\\College-Touring-main\\mainwindow.cpp",
+  "file": "C:\\Users\\PC\\Downloads\\cmake-4.0.0-rc2-windows-x86_64\\cmake-4.0.0-rc2-windows-x86_64\\share\\cmake-4.0\\Help\\prop_tgt\\College-Touring-main\\mainwindow.cpp",
+  "output": "CMakeFiles\\CollegeManager.dir\\mainwindow.cpp.obj"
+},
+{
+  "directory": "C:/Users/PC/Downloads/cmake-4.0.0-rc2-windows-x86_64/cmake-4.0.0-rc2-windows-x86_64/share/cmake-4.0/Help/prop_tgt/College-Touring-main/build",
+  "command": "C:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -IC:/Users/PC/Downloads/cmake-4.0.0-rc2-windows-x86_64/cmake-4.0.0-rc2-windows-x86_64/share/cmake-4.0/Help/prop_tgt/College-Touring-main/build/CollegeManager_autogen/include -isystem C:/Qt/6.8.2/mingw_64/include/QtWidgets -isystem C:/Qt/6.8.2/mingw_64/include -isystem C:/Qt/6.8.2/mingw_64/include/QtCore -isystem C:/Qt/6.8.2/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.8.2/mingw_64/include/QtGui -isystem C:/Qt/6.8.2/mingw_64/include/QtSql -g -std=gnu++17 -o CMakeFiles\\CollegeManager.dir\\DatabaseManager.cpp.obj -c C:\\Users\\PC\\Downloads\\cmake-4.0.0-rc2-windows-x86_64\\cmake-4.0.0-rc2-windows-x86_64\\share\\cmake-4.0\\Help\\prop_tgt\\College-Touring-main\\DatabaseManager.cpp",
+  "file": "C:\\Users\\PC\\Downloads\\cmake-4.0.0-rc2-windows-x86_64\\cmake-4.0.0-rc2-windows-x86_64\\share\\cmake-4.0\\Help\\prop_tgt\\College-Touring-main\\DatabaseManager.cpp",
+  "output": "CMakeFiles\\CollegeManager.dir\\DatabaseManager.cpp.obj"
+}
+]
