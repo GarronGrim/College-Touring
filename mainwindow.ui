@@ -15,37 +15,97 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
+    <!-- Horizontal Layout for Dropdown and Maintenance Button -->
     <item>
-     <widget class="QComboBox" name="comboBoxColleges">
-      <property name="toolTip">
-       <string>Select a College</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="topLayout">
+      <item>
+       <widget class="QComboBox" name="comboBoxColleges">
+        <property name="toolTip">
+         <string>Select a College</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="maintenanceButton">
+        <property name="text">
+         <string>Maintenance</string>
+        </property>
+        <property name="toolTip">
+         <string>Access Maintenance Mode</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
+    <!-- Horizontal Layout for listWidgetDistances and listWidgetSouvenirs -->
     <item>
-     <widget class="QListWidget" name="listWidgetDistances">
-      <property name="toolTip">
-       <string>Distance List</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <!-- Original ListWidget (Distances) -->
+      <item>
+       <widget class="QListWidget" name="listWidgetDistances">
+        <property name="toolTip">
+         <string>Distance List</string>
+        </property>
+       </widget>
+      </item>
+      <!-- New ListWidget for displaying souvenirs -->
+      <item>
+       <widget class="QWidget" name="souvenirWidgetBox">
+        <layout class="QVBoxLayout" name="souvenirWidgetLayout">
+         <item>
+          <widget class="QListWidget" name="listWidgetSouvenirs">
+           <property name="toolTip">
+            <string>Souvenirs List</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
     </item>
+    <!-- Horizontal Layout for Lock/Unlock Buttons and Next/Import Buttons -->
     <item>
-     <widget class="QPushButton" name="lockButton">
-      <property name="text">
-       <string>Lock List</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="buttonLayout">
+      <!-- Lock and Unlock Buttons -->
+      <item>
+       <widget class="QPushButton" name="lockButton">
+        <property name="text">
+         <string>Lock List</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="unlockButton">
+        <property name="text">
+         <string>Unlock List</string>
+        </property>
+       </widget>
+      </item>
+      <!-- Next and Import Buttons -->
+      <item>
+       <widget class="QPushButton" name="nextButton">
+        <property name="text">
+         <string>Next</string>
+        </property>
+        <property name="toolTip">
+         <string>Cycle through highlighted colleges</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="importButton">
+        <property name="text">
+         <string>Import New Campuses</string>
+        </property>
+        <property name="toolTip">
+         <string>Import new campus distances from CSV</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
-    <item>
-     <widget class="QPushButton" name="importButton">
-      <property name="text">
-       <string>Import New Campuses</string>
-      </property>
-      <property name="toolTip">
-       <string>Import new campus distances from CSV</string>
-      </property>
-     </widget>
-    </item>
+    <!-- Label for Total Distance -->
     <item>
      <widget class="QLabel" name="labelTotalDistance">
       <property name="text">
