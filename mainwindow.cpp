@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "DatabaseManager.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -156,6 +157,40 @@ void MainWindow::onSouvenirItemClicked(QListWidgetItem *item) {
     }
 }
 
+QStringList MainWindow::parseCSVLine(const QString &line) {
+    QStringList result;
+    QString current;
+    bool inQuotes = false;
+    
+    for (int i = 0; i < line.length(); ++i) {
+        QChar c = line[i];
+
+        if (c == '\"') {
+            // Toggle the inQuotes flag unless it's an escaped quote.
+            if (inQuotes && i + 1 < line.length() && line[i + 1] == '\"') {
+                // Escaped quote, add one quote and skip the next character.
+                current.append('\"');
+                ++i;
+            } else {
+                inQuotes = !inQuotes;  // Toggle the inQuotes flag
+            }
+        } else if (c == ',' && !inQuotes) {
+            // Field separator found outside of quotes.
+            result.append(current);
+            current.clear();
+        } else {
+            // Append the character to the current field.
+            current.append(c);
+        }
+    }
+
+    // Append the last field (in case the line doesn't end with a comma)
+    result.append(current);
+
+    return result;
+}
+
+
 void MainWindow::onMaintenanceButtonClicked() {
     bool correct;
     QString password = QInputDialog::getText(this, "Enter Password", "Enter 4-Digit Maintenance Password:",
@@ -174,14 +209,13 @@ void MainWindow::onMaintenanceButtonClicked() {
                     in.readLine();  // Skip header line
                     while (!in.atEnd()) {
                         QString line = in.readLine();
-                        QStringList columns = line.split(",");
+                        QStringList columns = parseCSVLine(line);
 
                         if (columns.size() == 3) {
                             QString startCollege = columns[0].trimmed();
                             QString endCollege = columns[1].trimmed();
                             double distance = columns[2].toDouble();
 
-                            // Update or insert the data into the Distances table
                             dbManager->addCollegeDistanceMaintenance(startCollege, endCollege, distance);
                         }
                     }
@@ -203,14 +237,13 @@ void MainWindow::onMaintenanceButtonClicked() {
                     in.readLine();  // Skip header line
                     while (!in.atEnd()) {
                         QString line = in.readLine();
-                        QStringList columns = line.split(",");
+                        QStringList columns = parseCSVLine(line);
 
                         if (columns.size() == 3) {
                             QString collegeName = columns[0].trimmed();
                             QString souvenirName = columns[1].trimmed();
                             double price = columns[2].toDouble();
 
-                            // Update or insert the data into the Souvenirs table
                             dbManager->addSouvenirMaintenance(collegeName, souvenirName, price);
                         }
                     }
@@ -237,6 +270,7 @@ void MainWindow::onMaintenanceButtonClicked() {
         }
     }
 }
+
 
 void MainWindow::openEditDataDialog() {
     bool ok;

@@ -42,35 +42,6 @@ void DatabaseManager::initializeTables() {
     }
 }
 
-QStringList parseCSVLine(const QString &line) {
-    QStringList result;
-    QString current;
-    bool inQuotes = false;
-    
-    for (int i = 0; i < line.length(); ++i) {
-        QChar c = line[i];
-        if (c == '\"') {
-            // Toggle the inQuotes flag unless it's an escaped quote.
-            if (inQuotes && i + 1 < line.length() && line[i + 1] == '\"') {
-                // Escaped quote, add one quote and skip the next character.
-                current.append('\"');
-                ++i;
-            } else {
-                inQuotes = !inQuotes;
-            }
-        } else if (c == ',' && !inQuotes) {
-            // Field separator found outside of quotes.
-            result.append(current);
-            current.clear();
-        } else {
-            current.append(c);
-        }
-    }
-    // Append the last field.
-    result.append(current);
-    return result;
-}
-
 bool DatabaseManager::importCSV(const QString &filePath, const QString &tableName, const QStringList &columns) {
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -117,6 +88,35 @@ bool DatabaseManager::importCSV(const QString &filePath, const QString &tableNam
     }
     file.close();
     return true;
+}
+
+QStringList DatabaseManager::parseCSVLine(const QString &line) {
+    QStringList result;
+    QString current;
+    bool inQuotes = false;
+    
+    for (int i = 0; i < line.length(); ++i) {
+        QChar c = line[i];
+        if (c == '\"') {
+            // Toggle the inQuotes flag unless it's an escaped quote.
+            if (inQuotes && i + 1 < line.length() && line[i + 1] == '\"') {
+                // Escaped quote, add one quote and skip the next character.
+                current.append('\"');
+                ++i;
+            } else {
+                inQuotes = !inQuotes;
+            }
+        } else if (c == ',' && !inQuotes) {
+            // Field separator found outside of quotes.
+            result.append(current);
+            current.clear();
+        } else {
+            current.append(c);
+        }
+    }
+    // Append the last field.
+    result.append(current);
+    return result;
 }
 
 std::vector<QString> DatabaseManager::getColleges() {
@@ -235,7 +235,6 @@ void DatabaseManager::addCollegeDistanceMaintenance(const QString &startCollege,
 }
 
 
-
 void DatabaseManager::addSouvenirMaintenance(const QString &collegeName, const QString &souvenirName, double price) {
     // Check if the souvenir already exists for the given college
     QSqlQuery checkQuery;
@@ -275,6 +274,7 @@ void DatabaseManager::addSouvenirMaintenance(const QString &collegeName, const Q
         }
     }
 }
+
 
 void DatabaseManager::updateSouvenir(const QString &college, const QString &souvenir, double newPrice) {
     QSqlQuery query;

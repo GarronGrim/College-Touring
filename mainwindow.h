@@ -44,6 +44,8 @@ private slots:
 
     std::vector<std::pair<QString, double>> calculateShortestTrip(DatabaseManager* dbManager, const QString& startCollege);
 
+    QStringList parseCSVLine(const QString &line);
+
 private:
     Ui::MainWindow *ui;
     DatabaseManager *dbManager;

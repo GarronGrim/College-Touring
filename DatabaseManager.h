@@ -59,6 +59,8 @@ public:
 
     void deleteSouvenir(const QString &college, const QString &souvenir);
 
+    static QStringList parseCSVLine(const QString &line);
+
 private:
     QSqlDatabase db;
     void initializeTables();
