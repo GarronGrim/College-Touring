@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Initialize DatabaseManager (assumes campus.db is in the working directory (build)).
     dbManager = new DatabaseManager("campus.db");
-//    listWidgetSelectedColleges = findChild<QListWidget*>("listWidgetSelectedColleges");
+    // listWidgetSelectedColleges = findChild<QListWidget*>("listWidgetSelectedColleges");
 
     QString appDir = QCoreApplication::applicationDirPath();
     QString distancesFile = appDir + "/collegedistances.csv";
@@ -53,10 +53,12 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::onDistanceItemClicked);
     connect(ui->lockButton, &QPushButton::clicked,
             this, &MainWindow::onLockButtonClicked);
-    connect(ui->unlockButton, &QPushButton::clicked, 
-            this, &MainWindow::onUnlockButtonClicked);
     connect(ui->nextButton, &QPushButton::clicked, 
             this, &MainWindow::onNextButtonClicked);
+    connect(ui->listWidgetSouvenirs, &QListWidget::itemDoubleClicked,
+            this, &MainWindow::onSouvenirDoubleClicked);
+    connect(ui->maintenanceButton, &QPushButton::clicked,
+            this, &MainWindow::onMaintenanceButtonClicked);
 }
 
 MainWindow::~MainWindow() {
@@ -89,21 +91,20 @@ void MainWindow::updateCollegeComboBox() {
 
 void MainWindow::onListWidgetContextMenuRequested(const QPoint &pos) {
     QListWidgetItem* item = ui->listWidgetDistances->itemAt(pos);
-    if (!item) {
+    if (!item)
+        return;
+
+    // Prevent toggling the highlight for the starting college
+    if (item->data(Qt::UserRole).toString() == "starting") {
         return;
     }
 
-    // Create the context menu
     QMenu contextMenu(this);
-
-    // Add action to toggle highlight
     QAction* toggleHighlightAction = new QAction("Toggle Highlight", this);
     connect(toggleHighlightAction, &QAction::triggered, this, [this, item]() {
         toggleItemHighlight(item);
     });
     contextMenu.addAction(toggleHighlightAction);
-
-    // Show the menu at the right-clicked position
     contextMenu.exec(ui->listWidgetDistances->mapToGlobal(pos));
 }
 
@@ -116,47 +117,27 @@ void MainWindow::toggleItemHighlight(QListWidgetItem* item) {
     }
 }
 
-void MainWindow::updateDistanceList(const QString &college) {
-    // Retrieve all colleges from the database.
-    std::vector<QString> colleges = dbManager->getColleges();
-
-    // Reorder the list so that the selected college is the starting point.
-    auto it = std::find(colleges.begin(), colleges.end(), college);
-    if (it != colleges.end()) {
-        std::iter_swap(colleges.begin(), it);
-    }
-
-    // Use TripPlanner to calculate the optimal trip.
-    TripPlanner planner;
-    planner.calculateTrip(colleges, dbManager);
-    double totalDistance = planner.getTotalDistance();
-    std::vector<QString> tripPath = planner.getPath();
-
-    // Clear the list widget.
+void MainWindow::updateDistanceList(const QString &selectedCollege) {
     ui->listWidgetDistances->clear();
 
-    // Display each leg of the trip with the distance.
-    double summedDistance = 0.0;
-    if (!tripPath.empty()) {
-        // First college: starting point.
-        QListWidgetItem *item = new QListWidgetItem(tripPath[0] + " -(Start, 0 miles)");
-        ui->listWidgetDistances->addItem(item);
-    }
-    
-    // For each subsequent college, show the distance from the previous college.
-    for (size_t i = 1; i < tripPath.size(); ++i) {
-        QString prev = tripPath[i - 1];
-        QString curr = tripPath[i];
-        double legDistance = dbManager->getDistance(prev, curr);
-        summedDistance += legDistance;
-        QString itemText = QString("%1 - %2 miles").arg(curr).arg(legDistance);
-        QListWidgetItem *item = new QListWidgetItem(itemText);
-        ui->listWidgetDistances->addItem(item);
-    }
+    // Add the starting college at the top.
+    QListWidgetItem *referenceItem = new QListWidgetItem(selectedCollege + " - (Start)");
+    referenceItem->setData(Qt::UserRole, "reference");
+    referenceItem->setFlags(referenceItem->flags() & ~Qt::ItemIsSelectable);
+    ui->listWidgetDistances->addItem(referenceItem);
 
-    // Update the total distance label with the summed distance.
-    ui->labelTotalDistance->setText(QString("Total Distance: %1 miles").arg(summedDistance));
+    // Retrieve all colleges from the database.
+    std::vector<QString> allColleges = dbManager->getColleges();
+    for (const QString &college : allColleges) {
+        if (college == selectedCollege)
+            continue;  
+        double distance = dbManager->getDistance(selectedCollege, college);
+        QString displayText = QString("%1 - %2 miles").arg(college).arg(distance);
+        QListWidgetItem *item = new QListWidgetItem(displayText);
+        ui->listWidgetDistances->addItem(item);
+    }
 }
+
 
 void MainWindow::onDistanceItemClicked(QListWidgetItem *item) {
     if (listLocked) {
@@ -191,16 +172,14 @@ void MainWindow::updateSouvenirList(const QString &college) {
     }
 }
 
-
 void MainWindow::onNextButtonClicked() {
     static int currentIndex = -1;
     QList<QListWidgetItem*> highlightedItems;
 
     for (int i = 0; i < ui->listWidgetDistances->count(); ++i) {
         QListWidgetItem* item = ui->listWidgetDistances->item(i);
-        if (item->background() == QColor(Qt::yellow)) {
+        if (item->background() == QColor(Qt::yellow))
             highlightedItems.append(item);
-        }
     }
 
     if (highlightedItems.isEmpty()) {
@@ -208,89 +187,119 @@ void MainWindow::onNextButtonClicked() {
         return;
     }
 
-    if (currentIndex == -1 || currentIndex >= highlightedItems.size() - 1) {
-        currentIndex = 0;
+    // If at the end, finalize current college, update display, then reset trip.
+    if (currentIndex >= highlightedItems.size() - 1) {
+        QString currentCollege = highlightedItems[currentIndex]->text().section(" -", 0, 0).trimmed();
+        if (!visitedColleges.contains(currentCollege))
+            visitedColleges.append(currentCollege);
+        updatePurchasedSouvenirsDisplay();
+        currentIndex = -1;
+        onUnlockButtonClicked();
+        return;
     } else {
+        if (currentIndex >= 0) {
+            QString currentCollege = highlightedItems[currentIndex]->text().section(" -", 0, 0).trimmed();
+            if (!visitedColleges.contains(currentCollege))
+                visitedColleges.append(currentCollege);
+        }
         currentIndex++;
     }
 
     ui->listWidgetDistances->setCurrentItem(highlightedItems[currentIndex]);
-    
-    // Extract college name correctly
     QString selectedCollege = highlightedItems[currentIndex]->text().section(" -", 0, 0).trimmed();
-
-    qDebug() << "Fetching souvenirs for: " << selectedCollege;
-    
     updateSouvenirList(selectedCollege);
+    updatePurchasedSouvenirsDisplay();
 }
 
 
 void MainWindow::onLockButtonClicked() {
-    qDebug() << "Lock button clicked";
+    // Clear souvenir display.
+    ui->listWidgetPurchasedSouvenirs->clear();
+    visitedColleges.clear();
+    purchases.clear();
 
-    // Step 1: Identify the highlighted items in the current list
-    QList<QListWidgetItem*> highlightedItems;
-    std::vector<QString> highlightedCollegeNames;
+    // Get the reference college from the dropdown.
+    QString startingCollege = ui->comboBoxColleges->currentText();
 
-    // Traverse the list to gather the highlighted items and their data
-    for (int i = 0; i < ui->listWidgetDistances->count(); ++i) {
+    // Gather the highlighted colleges (skip the reference item if it exists).
+    std::vector<QString> selectedColleges;
+    selectedColleges.push_back(startingCollege);  // Ensure starting college is first
+
+    // Iterate over all items (after the reference) and add highlighted items.
+    for (int i = 0; i < ui->listWidgetDistances->count(); i++) {
         QListWidgetItem* item = ui->listWidgetDistances->item(i);
+        // Skip the reference college if it’s marked.
+        if (item->data(Qt::UserRole).toString() == "reference")
+            continue;
         if (item->background() == QColor(Qt::yellow)) {
-            highlightedItems.append(item);
-            highlightedCollegeNames.push_back(item->text());  // Store only the text of the highlighted colleges
+            // When planning the trip, use only the college name (strip any extra info).
+            QString collegeName = item->text().section(" -", 0, 0).trimmed();
+            selectedColleges.push_back(collegeName);
         }
     }
 
-    // Debug: Log the number of highlighted items
-    qDebug() << "Highlighted items: " << highlightedItems.size();
-
-    // Step 2: If there are no highlighted items, show a warning and exit
-    if (highlightedItems.isEmpty()) {
-        QMessageBox::information(this, "No Highlights", "No highlighted colleges to lock.");
+    if (selectedColleges.size() < 2) {
+        QMessageBox::information(this, "Insufficient Selection",
+                                 "Please highlight at least one other college before planning a trip.");
         return;
     }
 
-    // Step 3: Lock the list visually (but not interaction completely)
-    listLocked = true;
-    qDebug() << "List locked";
+    // Calculate the trip based on the selected (highlighted) colleges.
+    TripPlanner planner;
+    planner.calculateTrip(selectedColleges, dbManager);
+    double totalDistance = planner.getTotalDistance();
+    std::vector<QString> tripPath = planner.getPath();
 
-    // Step 4: Clear the list completely before adding the highlighted items
-    ui->listWidgetDistances->clear();  // Clears all items from the list
+    // Now update the list to show only the planned trip order.
+    ui->listWidgetDistances->clear();
 
-    // Step 5: Iterate through the highlighted colleges and re-add them to the list
-    for (const QString& collegeName : highlightedCollegeNames) {
-        // Create a new item for each college
-        QListWidgetItem* newItem = new QListWidgetItem(collegeName);  // Create a new item with name text
-        newItem->setBackground(Qt::yellow);  // Ensure the highlighted background color is preserved
-        ui->listWidgetDistances->addItem(newItem);  // Add the new item to the list
+    double summedDistance = 0.0;
+    if (!tripPath.empty()) {
+        // Display the starting college as the first item.
+        QListWidgetItem *startItem = new QListWidgetItem(tripPath[0] + " - (Start, 0 miles)");
+        // Mark it as reference by storing a custom role.
+        startItem->setData(Qt::UserRole, "reference");
+        startItem->setBackground(Qt::yellow);
+        ui->listWidgetDistances->addItem(startItem);
+    }
+    
+    // For each subsequent college, calculate the leg distance and display it.
+    for (size_t i = 1; i < tripPath.size(); i++) {
+        QString prev = tripPath[i - 1];
+        QString curr = tripPath[i];
+        double legDistance = dbManager->getDistance(prev, curr);
+        summedDistance += legDistance;
+        QString itemText = QString("%1 - %2 miles").arg(curr).arg(legDistance);
+        QListWidgetItem *item = new QListWidgetItem(itemText);
+        item->setBackground(Qt::yellow);
+        ui->listWidgetDistances->addItem(item);
     }
 
-    // Step 6: Inform the user that only the highlighted colleges are retained
-    QMessageBox::information(this, "List Locked", "Only highlighted colleges are retained.");
+    ui->labelTotalDistance->setText(QString("Total Distance: %1 miles").arg(summedDistance));
+
+    QMessageBox::information(this, "Trip Planned", "Trip planned successfully.");
+
+    // Update the souvenirs for the starting college.
+    if (ui->listWidgetDistances->count() > 0) {
+        QListWidgetItem* firstItem = ui->listWidgetDistances->item(0);
+        ui->listWidgetDistances->setCurrentItem(firstItem);
+        QString collegeName = firstItem->text().section(" -", 0, 0).trimmed();
+        updateSouvenirList(collegeName);
+    }
 }
+
 
 void MainWindow::onUnlockButtonClicked() {
-    // Step 1: Unlock the list
     listLocked = false;
-    ui->listWidgetDistances->setEnabled(true);  // Enable the list for further interactions
+    ui->listWidgetDistances->setEnabled(true);
+    updateDistanceList(ui->comboBoxColleges->currentText());
+    ui->labelTotalDistance->setText("Total Distance: 0 miles");
+    
+    visitedColleges.clear();
+    purchases.clear();
 
-    // Step 2: Refresh the full list of colleges
-    updateDistanceList(ui->comboBoxColleges->currentText());  // Assuming comboBox tracks the current college
-
-    // Step 3: Add back highlighted items after the full list has been restored
-    // Iterate over the list to highlight the items again
-    for (int i = 0; i < ui->listWidgetDistances->count(); ++i) {
-        QListWidgetItem* item = ui->listWidgetDistances->item(i);
-        // Check if this item was highlighted before locking
-        if (item->background() == QColor(Qt::yellow)) {
-            item->setBackground(Qt::yellow);  // Set the highlighted background again
-        }
-    }
-
-    // Step 4: Optional message box to notify the user
     QMessageBox::information(this, "List Unlocked", "You can now select and modify items.");
 }
-
 
 void MainWindow::on_importButton_clicked() {
     // Construct the full path to newcampuses.csv in the executable's directory.
@@ -305,3 +314,191 @@ void MainWindow::on_importButton_clicked() {
         ui->statusbar->showMessage("Failed to import new campuses.", 3000);
     }
 }
+
+void MainWindow::onSouvenirDoubleClicked(QListWidgetItem *item) {
+    // Parse the item text "SouvenirName - $Price"
+    QString text = item->text();
+    QString name = text.section(" - $", 0, 0).trimmed();
+    double price = text.section(" - $", 1, 1).toDouble();
+
+    // Prompt for a quantity using QInputDialog (default 1, minimum 1)
+    bool ok = false;
+    int quantity = QInputDialog::getInt(this,
+                                        "Buy Souvenir",
+                                        "Enter quantity for " + name + ":",
+                                        1,     // default value
+                                        1,     // minimum value
+                                        100,   // maximum value
+                                        1,     // step
+                                        &ok);
+    if (!ok) {
+        // User canceled the input dialog.
+        return;
+    }
+
+    QString college = ui->listWidgetDistances->currentItem()->text();
+    college = college.section(" -", 0, 0).trimmed();
+
+    // Create a purchase record with quantity.
+    PurchasedSouvenir ps;
+    ps.college = college;
+    ps.souvenirName = name;
+    ps.price = price;
+    ps.quantity = quantity;
+    purchases.push_back(ps);
+
+    updatePurchasedSouvenirsDisplay();
+}
+
+void MainWindow::updatePurchasedSouvenirsDisplay() {
+    ui->listWidgetPurchasedSouvenirs->clear();
+    double grandTotal = 0.0;
+
+    // For each visited college (tracked in visitedColleges)
+    for (const QString &college : visitedColleges) {
+        double collegeTotal = 0.0;
+        // Iterate over purchases for this college.
+        for (const PurchasedSouvenir &ps : purchases) {
+            if (ps.college == college) {
+                double totalCost = ps.price * ps.quantity;
+                QString line = QString("%1: %2 x %3 = $%4")
+                                   .arg(college)
+                                   .arg(ps.souvenirName)
+                                   .arg(ps.quantity)
+                                   .arg(totalCost, 0, 'f', 2);
+                ui->listWidgetPurchasedSouvenirs->addItem(line);
+                collegeTotal += totalCost;
+            }
+        }
+        ui->listWidgetPurchasedSouvenirs->addItem(
+            QString("Total for %1: $%2").arg(college).arg(collegeTotal, 0, 'f', 2));
+        grandTotal += collegeTotal;
+    }
+    ui->listWidgetPurchasedSouvenirs->addItem(
+        QString("Grand Total: $%1").arg(grandTotal, 0, 'f', 2));
+}
+
+void MainWindow::onMaintenanceButtonClicked() {
+    bool ok;
+    // Prompt for the 4-digit maintenance password (using a password echo mode)
+    QString password = QInputDialog::getText(this,
+                                             "Maintenance",
+                                             "Enter 4-Digit Maintenance Password:",
+                                             QLineEdit::Password,
+                                             "",
+                                             &ok);
+    if (!ok) return;  // User canceled
+
+    // Check the password (change "1234" to your desired password)
+    if (password != "1234") {
+        QMessageBox::warning(this, "Invalid Password", "The maintenance password is incorrect.");
+        return;
+    }
+
+    // Ask the user if they want to modify existing data
+    QMessageBox::StandardButton reply = QMessageBox::question(this,
+                                                              "Maintenance",
+                                                              "Would you like to modify existing college or souvenir data?",
+                                                              QMessageBox::Yes | QMessageBox::No);
+    if (reply != QMessageBox::Yes)
+        return;
+
+    // Present the options in a combo box, now with an extra option to drop tables.
+    QStringList options;
+    options << "Add more colleges"
+            << "Edit Souvenir price"
+            << "Add Souvenir"
+            << "Delete Souvenir"
+            << "Drop Tables";
+    QString selection = QInputDialog::getItem(this,
+                                              "Select Modification",
+                                              "Select what you want to modify:",
+                                              options,
+                                              0,
+                                              false,
+                                              &ok);
+    if (!ok)
+        return;
+
+    // Execute the corresponding functionality based on user selection.
+    if (selection == "Add more colleges") {
+        // Call the same code as on_importButton_clicked.
+        on_importButton_clicked();
+    }
+    else if (selection == "Edit Souvenir price") {
+        // Prompt for the college name.
+        QString college = QInputDialog::getText(this,
+                                                "Edit Souvenir Price",
+                                                "Enter college name:");
+        if (college.isEmpty()) return;
+        
+        QString souvenir = QInputDialog::getText(this,
+                                                 "Edit Souvenir Price",
+                                                 "Enter souvenir name:");
+        if (souvenir.isEmpty()) return;
+        
+        double newPrice = QInputDialog::getDouble(this,
+                                                  "Edit Souvenir Price",
+                                                  "Enter new price:",
+                                                  0, 0, 10000, 2,
+                                                  &ok);
+        if (!ok) return;
+        
+        if (dbManager->updateSouvenirPrice(souvenir, newPrice))
+            QMessageBox::information(this, "Success", "Souvenir price updated successfully.");
+        else
+            QMessageBox::warning(this, "Failure", "Failed to update souvenir price.");
+    }
+    else if (selection == "Add Souvenir") {
+        QString college = QInputDialog::getText(this,
+                                                "Add Souvenir",
+                                                "Enter college name:");
+        if (college.isEmpty()) return;
+        
+        QString souvenir = QInputDialog::getText(this,
+                                                 "Add Souvenir",
+                                                 "Enter souvenir name:");
+        if (souvenir.isEmpty()) return;
+        
+        double price = QInputDialog::getDouble(this,
+                                               "Add Souvenir",
+                                               "Enter price:",
+                                               0, 0, 10000, 2,
+                                               &ok);
+        if (!ok) return;
+        
+        if (dbManager->addSouvenir(college, souvenir, price))
+            QMessageBox::information(this, "Success", "Souvenir added successfully.");
+        else
+            QMessageBox::warning(this, "Failure", "Failed to add souvenir.");
+    }
+    else if (selection == "Delete Souvenir") {
+        QString college = QInputDialog::getText(this,
+                                                "Delete Souvenir",
+                                                "Enter college name:");
+        if (college.isEmpty()) return;
+        
+        QString souvenir = QInputDialog::getText(this,
+                                                 "Delete Souvenir",
+                                                 "Enter souvenir name:");
+        if (souvenir.isEmpty()) return;
+        
+        if (dbManager->removeSouvenir(souvenir))
+            QMessageBox::information(this, "Success", "Souvenir deleted successfully.");
+        else
+            QMessageBox::warning(this, "Failure", "Failed to delete souvenir.");
+    }
+    else if (selection == "Drop Tables") {
+        QMessageBox::StandardButton confirm = QMessageBox::question(this,
+                                        "Confirm Drop",
+                                        "Are you sure you want to drop all tables? This action cannot be undone.",
+                                        QMessageBox::Yes | QMessageBox::No);
+        if (confirm == QMessageBox::Yes) {
+            dbManager->dropTables();
+            QMessageBox::information(this, "Success", "Tables dropped successfully.");
+        } else {
+            QMessageBox::information(this, "Cancelled", "Table drop cancelled.");
+        }
+    }
+}
+

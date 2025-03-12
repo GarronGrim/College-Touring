@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>400</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
-    <!-- Horizontal Layout for Dropdown and Maintenance Button -->
+    <!-- Top controls: Dropdown and Maintenance Button -->
     <item>
      <layout class="QHBoxLayout" name="topLayout">
       <item>
@@ -37,75 +37,50 @@
       </item>
      </layout>
     </item>
-    <!-- Horizontal Layout for listWidgetDistances and listWidgetSouvenirs -->
+    <!-- Middle controls: Distances List and Souvenirs List -->
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <!-- Original ListWidget (Distances) -->
+     <layout class="QHBoxLayout" name="middleLayout">
+      <!-- Trip (Distances) List -->
       <item>
        <widget class="QListWidget" name="listWidgetDistances">
         <property name="toolTip">
-         <string>Distance List</string>
+         <string>Trip Order</string>
         </property>
        </widget>
       </item>
-      <!-- New ListWidget for displaying souvenirs -->
+      <!-- Available Souvenirs List -->
       <item>
-       <widget class="QWidget" name="souvenirWidgetBox">
-        <layout class="QVBoxLayout" name="souvenirWidgetLayout">
-         <item>
-          <widget class="QListWidget" name="listWidgetSouvenirs">
-           <property name="toolTip">
-            <string>Souvenirs List</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <widget class="QListWidget" name="listWidgetSouvenirs">
+        <property name="toolTip">
+         <string>Available Souvenirs</string>
+        </property>
        </widget>
       </item>
      </layout>
     </item>
-    <!-- Horizontal Layout for Lock/Unlock Buttons and Next/Import Buttons -->
+    <!-- Control Buttons -->
     <item>
      <layout class="QHBoxLayout" name="buttonLayout">
-      <!-- Lock and Unlock Buttons -->
       <item>
        <widget class="QPushButton" name="lockButton">
         <property name="text">
-         <string>Lock List</string>
+         <string>Plan Trip</string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QPushButton" name="unlockButton">
-        <property name="text">
-         <string>Unlock List</string>
-        </property>
-       </widget>
-      </item>
-      <!-- Next and Import Buttons -->
       <item>
        <widget class="QPushButton" name="nextButton">
         <property name="text">
          <string>Next</string>
         </property>
         <property name="toolTip">
-         <string>Cycle through highlighted colleges</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="importButton">
-        <property name="text">
-         <string>Import New Campuses</string>
-        </property>
-        <property name="toolTip">
-         <string>Import new campus distances from CSV</string>
+         <string>Cycle through colleges</string>
         </property>
        </widget>
       </item>
      </layout>
     </item>
-    <!-- Label for Total Distance -->
+    <!-- Total Trip Distance Label -->
     <item>
      <widget class="QLabel" name="labelTotalDistance">
       <property name="text">
@@ -113,6 +88,14 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <!-- Purchased Souvenirs List -->
+    <item>
+     <widget class="QListWidget" name="listWidgetPurchasedSouvenirs">
+      <property name="toolTip">
+       <string>Purchased Souvenirs</string>
       </property>
      </widget>
     </item>

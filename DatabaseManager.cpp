@@ -23,8 +23,8 @@ DatabaseManager::~DatabaseManager() {
 void DatabaseManager::initializeTables() {
     QSqlQuery query;
 
-    query.exec("DROP TABLE IF EXISTS Distances");
-    query.exec("DROP TABLE IF EXISTS Souvenirs");
+    // query.exec("DROP TABLE IF EXISTS Distances");
+    // query.exec("DROP TABLE IF EXISTS Souvenirs");
     
     // Create the Distances table with a composite primary key
     if (!query.exec("CREATE TABLE IF NOT EXISTS Distances ("
@@ -214,4 +214,11 @@ double DatabaseManager::getDistance(const QString& startCollege, const QString& 
 bool DatabaseManager::importNewCampuses(const QString &filePath) {
     QStringList columns = {"start_college", "end_college", "distance"};
     return importCSV(filePath, "Distances", columns);
+}
+
+void DatabaseManager::dropTables() {
+    QSqlQuery query;
+    
+    query.exec("DROP TABLE IF EXISTS Distances");
+    query.exec("DROP TABLE IF EXISTS Souvenirs");
 }

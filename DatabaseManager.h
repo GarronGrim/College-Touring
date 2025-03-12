@@ -49,6 +49,9 @@ public:
     // Import new campuses CSV file into the Distances table.
     bool importNewCampuses(const QString& filePath);
 
+    // Drops tables for a fresh db 
+    void dropTables();
+
 private:
     QSqlDatabase db;
     void initializeTables();

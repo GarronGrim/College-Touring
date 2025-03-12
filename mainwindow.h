@@ -13,6 +13,19 @@
 #include <unordered_set>
 #include "DatabaseManager.h"
 
+struct Purchase {
+    QString college;
+    QString souvenir;
+    double price;
+};
+
+struct PurchasedSouvenir {
+    QString college;
+    QString souvenirName;
+    double price;
+    int quantity;
+};
+
 namespace Ui {
 class MainWindow;
 }
@@ -39,7 +52,22 @@ private slots:
     // Imports new colleges
     void on_importButton_clicked();
 
+    void onSouvenirDoubleClicked(QListWidgetItem *item);
+    
+    void updatePurchasedSouvenirsDisplay();
+
+    void onMaintenanceButtonClicked();
+
+
 private:
+    QVector<PurchasedSouvenir> purchases;
+    QStringList visitedColleges;
+    // Log of all purchases made during the trip
+    std::vector<Purchase> purchaseLog;
+    // Grand total of souvenirs purchased across all colleges
+    double grandTotal = 0.0;
+    // The currently selected college (updated when a souvenir list is shown)
+    QString currentCollege;
     Ui::MainWindow *ui;
     DatabaseManager *dbManager;
     bool listLocked;
