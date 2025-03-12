@@ -100,7 +100,7 @@ void MainWindow::onListWidgetContextMenuRequested(const QPoint &pos) {
     }
 
     QMenu contextMenu(this);
-    QAction* toggleHighlightAction = new QAction("Toggle Highlight", this);
+    QAction* toggleHighlightAction = new QAction("Select College", this);
     connect(toggleHighlightAction, &QAction::triggered, this, [this, item]() {
         toggleItemHighlight(item);
     });
@@ -110,10 +110,10 @@ void MainWindow::onListWidgetContextMenuRequested(const QPoint &pos) {
 
 void MainWindow::toggleItemHighlight(QListWidgetItem* item) {
     QColor currentColor = item->background().color();
-    if (currentColor == QColor(Qt::yellow)) {
+    if (currentColor == QColor(Qt::blue)) {
         item->setBackground(Qt::white);  // Unhighlight the item
     } else {
-        item->setBackground(Qt::yellow);  // Highlight the item
+        item->setBackground(Qt::blue);  // Highlight the item
     }
 }
 
@@ -142,7 +142,7 @@ void MainWindow::updateDistanceList(const QString &selectedCollege) {
 void MainWindow::onDistanceItemClicked(QListWidgetItem *item) {
     if (listLocked) {
         // If the list is locked, check if the item is highlighted
-        if (item->background() == QColor(Qt::yellow)) {
+        if (item->background() == QColor(Qt::blue)) {
             // Extract the college name from the clicked item
             QString collegeName = item->text().section(" -", 0, 0).trimmed();
             // Show souvenirs for the clicked college
@@ -178,7 +178,7 @@ void MainWindow::onNextButtonClicked() {
 
     for (int i = 0; i < ui->listWidgetDistances->count(); ++i) {
         QListWidgetItem* item = ui->listWidgetDistances->item(i);
-        if (item->background() == QColor(Qt::yellow))
+        if (item->background() == QColor(Qt::blue))
             highlightedItems.append(item);
     }
 
@@ -231,7 +231,7 @@ void MainWindow::onLockButtonClicked() {
         // Skip the reference college if it’s marked.
         if (item->data(Qt::UserRole).toString() == "reference")
             continue;
-        if (item->background() == QColor(Qt::yellow)) {
+        if (item->background() == QColor(Qt::blue)) {
             // When planning the trip, use only the college name (strip any extra info).
             QString collegeName = item->text().section(" -", 0, 0).trimmed();
             selectedColleges.push_back(collegeName);
@@ -259,7 +259,7 @@ void MainWindow::onLockButtonClicked() {
         QListWidgetItem *startItem = new QListWidgetItem(tripPath[0] + " - (Start, 0 miles)");
         // Mark it as reference by storing a custom role.
         startItem->setData(Qt::UserRole, "reference");
-        startItem->setBackground(Qt::yellow);
+        startItem->setBackground(Qt::blue);
         ui->listWidgetDistances->addItem(startItem);
     }
     
@@ -271,7 +271,7 @@ void MainWindow::onLockButtonClicked() {
         summedDistance += legDistance;
         QString itemText = QString("%1 - %2 miles").arg(curr).arg(legDistance);
         QListWidgetItem *item = new QListWidgetItem(itemText);
-        item->setBackground(Qt::yellow);
+        item->setBackground(Qt::blue);
         ui->listWidgetDistances->addItem(item);
     }
 
